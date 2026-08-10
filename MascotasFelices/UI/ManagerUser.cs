@@ -15,7 +15,7 @@ public class ManagerUser
         Console.WriteLine("║  [4]  Editar una mascota                       ║");
         Console.WriteLine("║  [5]  Eliminar una mascota                     ║");
         Console.WriteLine("║                                                ║");
-        Console.WriteLine("║  --------------------------------------------  ║");
+        Console.WriteLine("║  [6]  📊 Demostraciones LINQ (Colecciones)    ║");
         Console.WriteLine("║                                                ║");
         Console.WriteLine("║  [0]  Salir del sistema                        ║");
         Console.WriteLine("║                                                ║");

@@ -1,4 +1,5 @@
 ﻿using MascotasFelices.UI;
+using MascotasFelices.Helpers;
 
 string opcion;
 do
@@ -29,6 +30,11 @@ do
             Console.Clear();
             ManagerMascotas.EliminarMascota();
              break;
+        
+        case "6":
+            Console.Clear();
+            LINQDemostraciones.MostrarMenuDemostraciones();
+            break;
 
         case "0":
             Console.Clear();
@@ -39,7 +45,4 @@ do
             break;
     }
 }while(opcion != "0");
-
-
-
 
