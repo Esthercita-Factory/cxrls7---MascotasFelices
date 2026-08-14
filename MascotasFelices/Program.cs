@@ -29,12 +29,48 @@ do
             Console.Clear();
             ManagerMascotas.EliminarMascota();
             break;
-        
+
         case "6":
             Console.Clear();
             ConsultasLINQ.MostrarMenuConsultas();
             break;
 
+        case "7":
+            Console.Clear();
+            ManagerPacientes.CrearUnPaciente();
+            break;
+        case "8":
+            Console.Clear();
+            ManagerPacientes.MostrarTodosLosPacientes();
+            break;
+        case "9":
+            Console.Clear();
+            ManagerPacientes.BuscarPaciente();
+            break;
+        case "10":
+            Console.Clear();
+            ManagerPacientes.EditarPaciente();
+            break;
+        case "11":
+            Console.Clear();
+            ManagerPacientes.EliminarPaciente();
+            break;
+        case "12":
+            Console.Clear();
+            ManagerPacientes.AsociarMascotaAPaciente();
+            break;
+        case "13":
+            Console.Clear();
+            ManagerMascotas.VerFichaCompleta();
+            break;
+        case "14":
+            Console.Clear();
+            ManagerPacientes.AtenderMascota();
+            break;
+        case "15":
+            Console.Clear();
+            ManagerPacientes.VerRegistroActividad();
+            break;
         case "0":
             Console.Clear();
             Console.WriteLine("Hasta luego...");
@@ -43,6 +79,4 @@ do
             Console.WriteLine("Opcion no valida!");
             break;
     }
-}while(opcion != "0");
-
-
+} while (opcion != "0");

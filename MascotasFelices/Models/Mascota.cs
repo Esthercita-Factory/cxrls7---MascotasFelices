@@ -1,28 +1,53 @@
+using MascotasFelices.Interfaces;
+using MascotasFelices.Services;
+
 namespace MascotasFelices.Models;
 
-public class Mascota
+public class Mascota : Animal, IRegistrable
 {
-    public Guid Id { get; set; }
-    public string Nombre { get; set; }
     public string Raza { get; set; }
-    public int Edad { get; set; }
+    public Paciente Dueño { get; set; }
+    public List<ServicioVeterinario> HistorialAtenciones { get; set; } = new();
+
+    public Mascota(string nombre, string especie, string raza, int edad, Paciente dueño = null)
+        : base(nombre, especie, edad)
+    {
+        Raza = raza.Trim().ToLower();
+        Dueño = dueño;
+    }
     
-    public Mascota(string Nombre, string Raza, int Edad )
+
+    public override void EmitirSonido()
     {
-        Id = Guid.NewGuid();
-        this.Nombre = Nombre.Trim().ToLower();
-        this.Raza = Raza.Trim().ToLower();
-        this.Edad = Edad;
+        switch (Especie)
+        {
+            case "perro":
+                Console.WriteLine($"{Nombre} dice: ¡Guau Guau!");
+                break;
+            case "gato":
+                Console.WriteLine($"{Nombre} dice: ¡Miau!");
+                break;
+            case "ave":
+                Console.WriteLine($"{Nombre} dice: ¡Pio Pio!");
+                break;
+            case "conejo":
+                Console.WriteLine($"{Nombre} no hace mucho ruido, pero mueve la naricita.");
+                break;
+            default:
+                base.EmitirSonido();
+                break;
+        }
     }
 
-    public void MostrarDetalles()
+    public override void MostrarDetalles()
     {
-        Console.WriteLine($"Id: {Id}");
-        Console.WriteLine($"Nombre: {Nombre}");
+        base.MostrarDetalles();
         Console.WriteLine($"Raza: {Raza}");
-        Console.WriteLine($"Edad en Meses: {Edad}");
+        Console.WriteLine($"Dueño: {(Dueño != null ? Dueño.Nombre : "Sin asignar")}");
     }
 
+    public void Registrar()
+    {
+        Console.WriteLine($"✔ Mascota '{Nombre}' registrada correctamente en el sistema.");
+    }
 }
-
-        

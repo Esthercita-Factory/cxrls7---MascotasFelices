@@ -10,10 +10,10 @@ public static class MascotaRepositories
     {
         Mascotas =
         [
-            new Mascota("Firulais", "Criollo", 36),
-            new Mascota("Luna", "Labrador Retriever", 18),
-            new Mascota("Rocky", "Bulldog Frances", 42),
-            new Mascota("Michi", "Siames", 24),
+            new Mascota("Firulais", "perro", "Criollo", 36),
+            new Mascota("Luna", "perro", "Labrador Retriever", 18),
+            new Mascota("Rocky", "perro", "Bulldog Frances", 42),
+            new Mascota("Michi", "gato", "Siames", 24),
         ];
     }
 

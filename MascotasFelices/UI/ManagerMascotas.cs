@@ -35,14 +35,20 @@ public class ManagerMascotas
             Console.Write("\n-Ingrese el nombre de la mascota a agregar: ");
             var nombre = Console.ReadLine();
 
+            Console.Write("\n-Ingrese la especie de la mascota (perro/gato/ave/etc): ");
+            var especie = Console.ReadLine();
+
             Console.Write("\n-Ingrese la raza de la mascota a agregar: ");
             var raza = Console.ReadLine();
 
             Console.Write("\n-Ingrese la edad (en meses) de la mascota a agregar: ");
             var edad = LeerEdadIntParse();
 
-            var mascotaNueva = new Mascota(nombre, raza, edad);
+
+            var mascotaNueva = new Mascota(nombre, especie, raza, edad);
             MascotaRepositories.RegistrarMascota(mascotaNueva);
+            mascotaNueva.Registrar();
+            RegistroRepositories.Agregar($"Mascota '{nombre}' ({especie}) registrada en el sistema.");
 
             Console.WriteLine($"\nMascota {nombre} agregada con exito.");
             Console.Write("\nDesea agregar otra mascota(si/no): ");
@@ -168,6 +174,9 @@ public class ManagerMascotas
                 Console.Write("-Nuevo nombre: ");
                 var nuevoNombre = Console.ReadLine();
 
+                Console.Write("-Nueva especie: ");
+                var nuevaEspecie = Console.ReadLine();
+
                 Console.Write("-Nueva raza: ");
                 var nuevaRaza = Console.ReadLine();
 
@@ -175,6 +184,7 @@ public class ManagerMascotas
                 var nuevaEdad = LeerEdadIntParse();
 
                 mascota.Nombre = nuevoNombre;
+                mascota.Especie = nuevaEspecie;
                 mascota.Raza = nuevaRaza;
                 mascota.Edad = nuevaEdad;
 
@@ -200,7 +210,6 @@ public class ManagerMascotas
             Console.ReadKey();
         }
     }
-
     public static void EliminarMascota()
     {
         try
@@ -240,5 +249,47 @@ public class ManagerMascotas
             Console.WriteLine("Presione cualquier tecla para continuar...");
             Console.ReadKey();
         }
+
+    }
+
+    public static void VerFichaCompleta()
+    {
+        Console.Clear();
+        Console.WriteLine("---------- FICHA COMPLETA DE LA MASCOTA ----------");
+        Console.Write("\n-Ingrese el nombre de la mascota: ");
+        var nombre = Console.ReadLine();
+
+        var mascota = MascotaRepositories.EditarMascota(nombre);
+
+        if (mascota == null)
+        {
+            Console.WriteLine("\nNo se encontró ninguna mascota con ese nombre.");
+        }
+        else
+        {
+            Console.WriteLine();
+            mascota.MostrarDetalles(); // usa el override de Mascota (polimorfismo)
+
+            Console.Write("\nComportamiento: ");
+            mascota.EmitirSonido(); // usa el override segun la especie
+
+            Console.WriteLine($"\nHistorial de atenciones ({mascota.HistorialAtenciones.Count}):");
+            if (mascota.HistorialAtenciones.Count == 0)
+            {
+                Console.WriteLine("  Sin atenciones registradas todavia.");
+            }
+            else
+            {
+                foreach (var atencion in mascota.HistorialAtenciones.OrderByDescending(a => a.Fecha))
+                {
+                    var detalle = atencion is Services.Vacunacion vacuna ? $" - Vacuna: {vacuna.TipoVacuna}" : "";
+                    Console.WriteLine($"  - {atencion.Fecha:dd/MM/yyyy HH:mm} | {atencion.NombreServicio}{detalle}");
+                }
+            }
+        }
+
+        Console.Write("\nPresione cualquier tecla para continuar...");
+        Console.ReadKey();
+        Console.Clear();
     }
 }
