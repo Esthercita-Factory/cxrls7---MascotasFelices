@@ -1,4 +1,5 @@
 using MascotasFelices.Models;
+using System.Threading.Tasks;
 
 namespace MascotasFelices.Repositories;
 
@@ -20,6 +21,16 @@ public static class MascotaRepositories
     // CREATE
     public static void RegistrarMascota(Mascota mascotaNueva)
     {
+        Mascotas.Add(mascotaNueva);
+    }
+
+    //  metodo asincrono que simula el registro de una mascota con una espera real,
+    // como si estuviera guardando en una base de datos externa.
+    // Usamos async/await aqui porque esta operacion "tarda": mientras espera, el hilo
+    // principal queda libre para seguir atendiendo la aplicacion en vez de congelarse.
+    public static async Task RegistrarMascotaAsync(Mascota mascotaNueva)
+    {
+        await Task.Delay(1500); // simula la latencia de guardar en una base de datos
         Mascotas.Add(mascotaNueva);
     }
     

@@ -71,6 +71,22 @@ do
             Console.Clear();
             ManagerPacientes.VerRegistroActividad();
             break;
+        case "16":
+            Console.Clear();
+            await ManagerAsync.RegistrarMascotaAsyncMenu();
+            break;
+        case "17":
+            Console.Clear();
+            await ManagerAsync.ProcesarLlegadaDeMascotaAsync();
+            break;
+        case "18":
+            Console.Clear();
+            await ManagerAsync.RegistrarVariasMascotasSimultaneamenteAsync();
+            break;
+        case "19":
+            Console.Clear();
+            await ManagerAsync.CompararWhenAllYWhenAnyAsync();
+            break;
         case "0":
             Console.Clear();
             Console.WriteLine("Hasta luego...");
